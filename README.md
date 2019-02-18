@@ -82,7 +82,7 @@ Download the **[latest release](https://github.com/src-d/engine/releases)** for 
 
 Double-click on the tar file to extract it.
 
-Open your terminal and move it into your local bin folder to make it executable from anywhere:
+Open your terminal and move the binary to your local bin folder to make it executable from any directory:
 
 ```bash
 sudo mv ~/replace/path/to/engine_darwin_amd64/srcd /usr/local/bin/
@@ -119,31 +119,37 @@ srcd init
 # You can also provide a path
 srcd init /home/user/replace/path/
 ```
-**Note:** Ensure that you initialize source{d} Engine every time you want to process a new repository. Changes in the `init` working directory are not detected automatically.
 
-**Note for MaOS:** Docker for Mac [requires file sharing](https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users) for any path outside of `/Users`.
+**Note:**
+Ensure that you initialize source{d} Engine every time you want to process a new repository.
+Changes in the `init` working directory are not detected automatically.
+
+**Note for MacOS:**
+Docker for Mac [requires file sharing](https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users) for any path outside of `/Users`.
 
 ### 4. Explore the source{d} Engine
 
 To launch the [web client for the SQL interface](https://github.com/src-d/gitbase-web), run the following command and start executing queries:
 
 ```bash
+# Launch the query web client
 srcd web sql
 ```
 
 The first time you run some of these commands, the source{d} Engine will download and install the Docker containers that are needed. Be aware that this might take a bit of time, it is only on your first use. 
 
-If you prefer to stay with the command line, you can execute:
+If you prefer to work within your terminal via command line, you can open a SQL REPL
+that allows you to execute queries against your repositories by executing:
 
 ```bash
+# Launch the query CLI REPL
 srcd sql
 ```
-
-This will open a SQL REPL that allows you to execute queries against your repositories.
 
 If you want to run a query directly, you can also execute it as such:
 
 ```bash
+# Run query via CLI
 srcd sql "SHOW tables;"
 ```
 
@@ -153,16 +159,19 @@ You might have noticed that some queries below use the UAST function. This is to
 
 To see which languages are available, check the table of [supported languages](https://docs.sourced.tech/babelfish/languages).
 
-The first time you launch the web client, it will download and install the recommended drivers (those that are beta or higher). 
+If you want a playground to see examples of the UAST, or run your own, you can launch the [parse web client](https://github.com/bblfsh/web).
+
+The first time you launch the web client, it will download and install the recommended language drivers (those that are beta or higher):
 
 ```bash
-# Launch the web client
+# Launch the parse web client
 srcd web parse
 ```
 
 Alternatively you can also start parsing files on the command line:
 
 ```bash
+# Parse file via CLI
 srcd parse uast /path/to/file.java
 ```
 
@@ -279,16 +288,16 @@ You can now run the source{d} Engine, choose what you would like to do next:
 ## Guides and Examples
 
 For the full list of the commands supported by `srcd` and those
-that have been planned, please read [commands.md](docs/commands.md).
+on the roadmap, please read [commands.md](docs/commands.md).
 
-Collection of guides & examples using the source{d} Engine:
+Collection of documentation, guides, examples using the source{d} Engine:
 
 - [SonarSource Java Static Analysis Rules using Babelfish](https://github.com/bblfsh/sonar-checks)
 - A lot more coming soon! 
 
 ## Architecture
 
-The source{d} Engine functions as a CLI tool that provides easy access to components of the source{d} stack for Code As Data.
+The source{d} Engine functions as a command-line interface tool that provides easy access to components of the source{d} stack for Code As Data.
 
 It consists of a daemon managing all of the services, which are packaged as Docker containers:
 
@@ -363,7 +372,7 @@ Please refer [to our Contribution Guide](CONTRIBUTING.md) for more details.
 
 ## Credits
 
-This software uses code from several open source packages. We'd like to thank the contributors for all their efforts:
+This software uses code from open source packages. We'd like to thank the contributors for all their efforts:
 
 - [Cobra](https://github.com/spf13/cobra)
 
