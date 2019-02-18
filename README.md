@@ -1,5 +1,7 @@
+# source{d} Engine
+
 <a href="https://www.sourced.tech/engine">
-  <img src="docs/sourced-engine.png" alt="source{d} Engine" height="120px">
+  <img src="docs/sourced-engine.png" alt="source{d} Engine" height="120px" />
 </a>
 
 **Powerful language-agnostic analysis of your source code and git history.**
@@ -16,7 +18,6 @@
 [Slack](http://bit.ly/src-d-community) •
 [Twitter](https://twitter.com/sourcedtech)
 
-
 ## Introduction
 
 The source{d} Engine exposes powerful [Universal ASTs](#babelfish-uast) to analyze your code and a SQL engine to analyze your git history:
@@ -30,7 +31,7 @@ You can access a rendered version of this documentation at [docs.sourced.tech/en
 
 ## Contents
 
-- [Quickstart](#quickstart)
+- [Quick Start](#quick-start)
 - [Guides & Examples](#guides-and-examples)
 - [Architecture](#architecture)
 - [Babelfish UAST](#babelfish-uast)
@@ -40,24 +41,35 @@ You can access a rendered version of this documentation at [docs.sourced.tech/en
 - [Credits](#credits)
 - [License](#license)
 
-## Quickstart
+## Quick Start
 
 Follow the steps below to get started with source{d} Engine.
 
 ### 1. Install Docker
 
-Follow these instructions:
+Follow these instructions based on your OS:
 
-- [Docker for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac). Or, if you prefer to use [Homebrew](https://brew.sh/):
+#### Docker on macOS
+
+Follow instructions at [Docker for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac). You may also use [Homebrew](https://brew.sh/):
+
   ```bash
   brew cask install docker
   ```
-- [Docker for Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1)
+
+#### Docker on Ubuntu Linux
+
+Follow instructions at [Docker for Ubuntu Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1):
+
   ```bash
   sudo apt-get update
   sudo apt-get install docker-ce
   ```
-- [Docker for Arch Linux](https://wiki.archlinux.org/index.php/Docker#Installation)
+
+#### Docker on Arch Linux
+
+Follow instructions at [Docker for Arch Linux](https://wiki.archlinux.org/index.php/Docker#Installation):
+
   ```bash
   sudo pacman -S docker
   ```
@@ -66,7 +78,7 @@ Follow these instructions:
 
 Download the **[latest release](https://github.com/src-d/engine/releases)** for MacOS (Darwin) or Linux.
 
-**MacOS:**
+#### engine on macOS
 
 Double-click on the tar file to extract it.
 
@@ -76,30 +88,32 @@ Open your terminal and move it into your local bin folder to make it executable 
 sudo mv ~/replace/path/to/engine_darwin_amd64/srcd /usr/local/bin/
 ```
 
-**Linux:**
+#### engine on Linux
 
-Extract the tar file from your terminal:
+Extract the contents of the tar file from your terminal:
+
 ```bash
 tar -xvf ~/replace/path/to/engine_REPLACEVERSION_linux_amd64.tar.gz
 ```
 
-Move it into your local bin folder to be executable from anywhere:
+Move the binary to your local bin folder to be executable from any directory:
+
 ```bash
 sudo mv engine_linux_amd64/srcd /usr/local/bin/
 ```
 
-**Windows:**
+#### engine on Windows
 
-_Windows support is coming soon!_
+*Windows support is coming soon!*
 
 
 ### 3. Start source{d} Engine with your local repositories
 
 Now it's time to initialize the source{d} engine and provide it with some repositories to analyze:
 
-```
-# Without a path it operates on the local folder,
-# it works with nested folders.
+```bash
+# Without a path the engine operates on the local directory
+# it works with nested/sub-directories
 srcd init
 
 # You can also provide a path
@@ -154,7 +168,8 @@ srcd parse uast /path/to/file.java
 
 ### 5. Start executing queries
 
-**Understand which tables are available to you to query**:
+**Understand which tables are available to you to query:**
+
 ```bash
 gitbase> show tables;
 +--------------+
@@ -193,13 +208,13 @@ gitbase> DESCRIBE TABLE commits;
 +---------------------+-----------+
 ```
 
-**Show me the repositories I am analyzing**:
+**Show me the repositories I am analyzing:**
 
 ```sql
 SELECT * FROM repositories;
 ```
 
-**Top 10 repositories by commit count in [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref)**:
+**Top 10 repositories by commit count in [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref):**
 
 ```sql
 SELECT repository_id,commit_count 
@@ -214,7 +229,7 @@ DESC
 LIMIT 10;
 ```
 
-**Query all files from [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref)**:
+**Query all files from [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref):**
 
 ```sql
 SELECT cf.file_path, f.blob_content 
@@ -225,7 +240,7 @@ WHERE r.ref_name = 'HEAD'
 AND r.history_index = 0;
 ```
 
-**Retrieve the UAST for all files from [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref)**:
+**Retrieve the UAST for all files from [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref):**
 
 ```sql
 SELECT * FROM (
@@ -239,7 +254,7 @@ SELECT * FROM (
 ) t WHERE uast != '';
 ```
 
-**Query for all LICENSE & README files across history**:
+**Query for all LICENSE & README files across history:**
 
 ```sql
 SELECT repository_id, blob_content 
@@ -287,7 +302,7 @@ It consists of a daemon managing all of the services, which are packaged as Dock
 
 For more details on the architecture of this project, read [docs/architecture.md](docs/architecture.md).
 
-<p align="center"><img src="docs/architecture.png" height="150" /></p>
+<img src="./architecture-diagram.png" alt="source{d} Engine"height="150" />
 
 ## Babelfish UAST
 
