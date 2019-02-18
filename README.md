@@ -32,7 +32,12 @@ You can access a rendered version of this documentation at [docs.sourced.tech/en
 ## Contents
 
 - [Quick Start](#quick-start)
-- [Guides & Examples](#guides-and-examples)
+  - [Requirements](#1.-install-docker)
+  - [Installation](#2.-install-source{d}-engine)
+  - [Initialization](#3.-start-source{d}-engine-with-your-local-repositories)
+  - [Commands](#4.-Explore-the-source{d}-engine)
+  - [Examples](#5.-start-executing-queries)
+- [Guides & More Examples](#guides-and-examples)
 - [Architecture](#architecture)
 - [Babelfish UAST](#babelfish-uast)
 - [Clients & Connectors](#clients-and-connectors)
