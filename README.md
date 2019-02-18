@@ -106,6 +106,7 @@ sudo mv engine_linux_amd64/srcd /usr/local/bin/
 
 *Windows support is coming soon!*
 
+For status updates or if you want to help, you may check the [GitHub issue](https://github.com/src-d/engine/issues/45).
 
 ### 3. Start source{d} Engine with your local repositories
 
