@@ -274,11 +274,21 @@ Collection of guides & examples using the source{d} Engine:
 
 ## Architecture
 
-source{d} Engine functions as a CLI tool that provides easy access to components of the source{d} stack for Code As Data. It consists of a daemon managing all of the services (Babelfish, Enry, Gitbase etc.) which are packaged as docker containers.
+The source{d} Engine functions as a CLI tool that provides easy access to components of the source{d} stack for Code As Data.
 
-<p align="center"><img src="docs/architecture-diagram.png" height="150" /></p>
+It consists of a daemon managing all of the services, which are packaged as Docker containers:
+
+- [enry](https://github.com/src-d/enry): language classifier
+- [babelfish](https://doc.bblf.sh): universal code parser
+  - [daemon](https://github.com/bblfsh/bblfshd): Babelfish server
+  - [language drivers](https://github.com/search?q=topic%3Adriver+org%3Abblfsh&type=Repositories): parsers + normalizers for programming languages
+  - [babelfish-web](https://github.com/bblfsh/web): web client for Babelfish server
+- [gitbase](https://github.com/src-d/gitbase): SQL database interface to Git repositories
+  - [gitbase-web](https://github.com/src-d/gitbase-web): web client for gitbase
 
 For more details on the architecture of this project, read [docs/architecture.md](docs/architecture.md).
+
+<p align="center"><img src="docs/architecture.png" height="150" /></p>
 
 ## Babelfish UAST
 
