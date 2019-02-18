@@ -44,7 +44,7 @@ You can access a rendered version of this documentation at [docs.sourced.tech/en
 
 Follow the steps below to get started with source{d} Engine.
 
-#### 1. Install Docker
+### 1. Install Docker
 
 Follow these instructions:
 
@@ -62,7 +62,7 @@ Follow these instructions:
   sudo pacman -S docker
   ```
 
-#### 2. Install source{d} Engine
+### 2. Install source{d} Engine
 
 Download the **[latest release](https://github.com/src-d/engine/releases)** for MacOS (Darwin) or Linux.
 
@@ -93,7 +93,7 @@ sudo mv engine_linux_amd64/srcd /usr/local/bin/
 _Windows support is coming soon!_
 
 
-#### 3. Start source{d} Engine with your local repositories
+### 3. Start source{d} Engine with your local repositories
 
 Now it's time to initialize the source{d} engine and provide it with some repositories to analyze:
 
@@ -109,7 +109,7 @@ srcd init /home/user/replace/path/
 
 **Note for MaOS:** Docker for Mac [requires file sharing](https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users) for any path outside of `/Users`.
 
-#### 4. Explore the source{d} Engine
+### 4. Explore the source{d} Engine
 
 To launch the [web client for the SQL interface](https://github.com/src-d/gitbase-web), run the following command and start executing queries:
 
@@ -152,7 +152,7 @@ Alternatively you can also start parsing files on the command line:
 srcd parse uast /path/to/file.java
 ```
 
-#### 5. Start executing queries
+### 5. Start executing queries
 
 **Understand which tables are available to you to query**:
 ```bash
