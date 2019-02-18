@@ -130,6 +130,16 @@ Docker for Mac [requires file sharing](https://docs.docker.com/docker-for-mac/tr
 
 ### 4. Explore the source{d} Engine
 
+The source{d} Engine can [query code repositories](#querying-code) and its capabilities include [parsing code](#parsing-code) into [Universal Abstract Syntax Trees](#babelfish-uast) as well, via different interfaces.
+In this section we will cover a mix of some commands and interfaces available.
+
+**Note:**
+The first time you run some of these commands, the source{d} Engine will download and install the Docker containers as needed. Be aware that this might take a bit of time if it is the first time you use them.
+
+#### Querying code
+
+##### Query web interface
+
 To launch the [web client for the SQL interface](https://github.com/src-d/gitbase-web), run the following command and start executing queries:
 
 ```bash
@@ -137,7 +147,10 @@ To launch the [web client for the SQL interface](https://github.com/src-d/gitbas
 srcd web sql
 ```
 
-The first time you run some of these commands, the source{d} Engine will download and install the Docker containers that are needed. Be aware that this might take a bit of time, it is only on your first use. 
+This should open the [web interface](https://github.com/src-d/gitbase-web) in your browser.
+You can also access it directly at [http://localhost:8080](http://localhost:8080).
+
+##### Query command-line interface (CLI)
 
 If you prefer to work within your terminal via command line, you can open a SQL REPL
 that allows you to execute queries against your repositories by executing:
@@ -154,11 +167,17 @@ If you want to run a query directly, you can also execute it as such:
 srcd sql "SHOW tables;"
 ```
 
-You might have noticed that some queries below use the UAST function. This is to transform code to a [Universal Abstract Syntax Tree](#babelfish-uast). If you want a playground to see examples of the UAST, or run your own, you can launch the parse web client.
+**Note:**
+Queries using the [UAST](#babelfish-uast) function are meant for the `web sql` interface.
+The column for UAST will be seen as binary data in the CLI.
 
-**Note:** queries using the UAST function are meant for the `web sql` interface. The column for UAST will be seen as binary data in the CLI.
+#### Parsing code
 
-To see which languages are available, check the table of [supported languages](https://docs.sourced.tech/babelfish/languages).
+Sometimes you may want to parse files directly as [UASTs](#babelfish-uast).
+
+To see which languages are available, check the table of [supported languages](#babelfish-uast).
+
+##### Parse web client
 
 If you want a playground to see examples of the UAST, or run your own, you can launch the [parse web client](https://github.com/bblfsh/web).
 
@@ -169,11 +188,34 @@ The first time you launch the web client, it will download and install the recom
 srcd web parse
 ```
 
-Alternatively you can also start parsing files on the command line:
+This should open the [web interface](https://github.com/bblfsh/web) in your browser.
+You can also access it directly at [http://localhost:8081](http://localhost:8081).
+
+##### Parse command-line interface (CLI)
+
+Alternatively, you can also start parsing files on the command line:
 
 ```bash
 # Parse file via CLI
 srcd parse uast /path/to/file.java
+```
+
+To parse a file specifying the programming language:
+
+```bash
+srcd parse uast --lang=LANGUAGE /path/to/file
+```
+
+To see the installed language drivers:
+
+```bash
+srcd parse drivers list
+```
+
+To install other language drivers use:
+
+```bash
+srcd parse drivers install python
 ```
 
 ### 5. Start executing queries
