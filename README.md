@@ -1,5 +1,7 @@
+# source{d} Engine
+
 <a href="https://www.sourced.tech/engine">
-  <img src="docs/sourced-engine.png" alt="source{d} Engine" height="120px">
+  <img src="docs/sourced-engine.png" alt="source{d} Engine" height="120px" />
 </a>
 
 **Powerful language-agnostic analysis of your source code and git history.**
@@ -16,23 +18,26 @@
 [Slack](http://bit.ly/src-d-community) •
 [Twitter](https://twitter.com/sourcedtech)
 
-
 ## Introduction
 
-source{d} Engine exposes powerful Universal AST's to analyze your code and a SQL engine to analyze your git history:
+The source{d} Engine exposes powerful [Universal ASTs](#babelfish-uast) to analyze your code and a SQL engine to analyze your git history:
 
 - **Code Retrieval**: retrieve and store git repositories as a dataset.
-- **Language Agnostic Code Analysis**: automatically identify languages, parse source code, and extract the pieces that matter in a completely language-agnostic way.
+- **Language-Agnostic Code Analysis**: automatically identify languages, parse source code, and extract the pieces that matter in a completely language-agnostic way.
 - **Git Analysis**: powerful SQL based analysis on top of your git repositories.
 - **Querying With Familiar APIs**: analyze your code through powerful friendly APIs, such as SQL, gRPC, REST, and various client libraries.
 
-You can find a version of this docummentation, properly rendered, at https://docs.sourced.tech/engine.
-
+You can access a rendered version of this documentation at [docs.sourced.tech/engine](https://docs.sourced.tech/engine).
 
 ## Contents
 
-- [Quickstart](#quickstart)
-- [Guides & Examples](#guides-and-examples)
+- [Quick Start](#quick-start)
+  - [Requirements](#1.-install-docker)
+  - [Installation](#2.-install-source{d}-engine)
+  - [Initialization](#3.-start-source{d}-engine-with-your-local-repositories)
+  - [Commands](#4.-Explore-the-source{d}-engine)
+  - [Examples](#5.-start-executing-queries)
+- [Guides & More Examples](#guides-and-examples)
 - [Architecture](#architecture)
 - [Babelfish UAST](#babelfish-uast)
 - [Clients & Connectors](#clients-and-connectors)
@@ -41,112 +46,187 @@ You can find a version of this docummentation, properly rendered, at https://doc
 - [Credits](#credits)
 - [License](#license)
 
-## Quickstart
+## Quick Start
 
 Follow the steps below to get started with source{d} Engine.
 
-#### 1. Install Docker
+### 1. Install Docker
 
-Follow these instructions:
+Follow these instructions based on your OS:
 
-- [Docker for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac). Or, if you prefer to use [Homebrew](https://brew.sh/):
+#### Docker on macOS
+
+Follow instructions at [Docker for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac). You may also use [Homebrew](https://brew.sh/):
+
   ```bash
   brew cask install docker
   ```
-- [Docker for Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1)
+
+#### Docker on Ubuntu Linux
+
+Follow instructions at [Docker for Ubuntu Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1):
+
   ```bash
   sudo apt-get update
   sudo apt-get install docker-ce
   ```
-- [Docker for Arch Linux](https://wiki.archlinux.org/index.php/Docker#Installation)
+
+#### Docker on Arch Linux
+
+Follow instructions at [Docker for Arch Linux](https://wiki.archlinux.org/index.php/Docker#Installation):
+
   ```bash
   sudo pacman -S docker
   ```
 
-#### 2. Install source{d} Engine
+### 2. Install source{d} Engine
 
 Download the **[latest release](https://github.com/src-d/engine/releases)** for MacOS (Darwin) or Linux.
 
-**MacOS:**
+#### engine on macOS
 
 Double-click on the tar file to extract it.
 
-Open your terminal and move it into your local bin folder to make it executable from anywhere:
+Open your terminal and move the binary to your local bin folder to make it executable from any directory:
 
 ```bash
 sudo mv ~/replace/path/to/engine_darwin_amd64/srcd /usr/local/bin/
 ```
 
-**Linux:**
+#### engine on Linux
 
-Extract the tar file from your terminal:
+Extract the contents of the tar file from your terminal:
+
 ```bash
 tar -xvf ~/replace/path/to/engine_REPLACEVERSION_linux_amd64.tar.gz
 ```
 
-Move it into your local bin folder to be executable from anywhere:
+Move the binary to your local bin folder to be executable from any directory:
+
 ```bash
 sudo mv engine_linux_amd64/srcd /usr/local/bin/
 ```
 
+#### engine on Windows
 
-#### 3. Start source{d} Engine with your local repositories
+*Windows support is coming soon!*
+
+For status updates or if you want to help, you may check the [GitHub issue](https://github.com/src-d/engine/issues/45).
+
+### 3. Start source{d} Engine with your local repositories
 
 Now it's time to initialize the source{d} engine and provide it with some repositories to analyze:
 
-```
-# Without a path it operates on the local folder,
-# it works with nested folders.
+```bash
+# Without a path the engine operates on the local directory
+# it works with nested/sub-directories
 srcd init
 
 # You can also provide a path
 srcd init /home/user/replace/path/
 ```
 
-#### 4. Explore the source{d} Engine
+**Note:**
+Ensure that you initialize source{d} Engine every time you want to process a new repository.
+Changes in the `init` working directory are not detected automatically.
+
+**Note for MacOS:**
+Docker for Mac [requires file sharing](https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users) for any path outside of `/Users`.
+
+### 4. Explore the source{d} Engine
+
+The source{d} Engine can [query code repositories](#querying-code) and its capabilities include [parsing code](#parsing-code) into [Universal Abstract Syntax Trees](#babelfish-uast) as well, via different interfaces.
+In this section we will cover a mix of some commands and interfaces available.
+
+**Note:**
+The first time you run some of these commands, the source{d} Engine will download and install the Docker containers as needed. Be aware that this might take a bit of time if it is the first time you use them.
+
+#### Querying code
+
+##### Query web interface
 
 To launch the [web client for the SQL interface](https://github.com/src-d/gitbase-web), run the following command and start executing queries:
 
 ```bash
+# Launch the query web client
 srcd web sql
 ```
 
-The first time you run some of these commands, the source{d} Engine will download and install the Docker containers that are needed. Be aware that this might take a bit of time, it is only on your first use. 
+This should open the [web interface](https://github.com/src-d/gitbase-web) in your browser.
+You can also access it directly at [http://localhost:8080](http://localhost:8080).
 
-If you prefer to stay with the command line, you can execute:
+##### Query command-line interface (CLI)
+
+If you prefer to work within your terminal via command line, you can open a SQL REPL
+that allows you to execute queries against your repositories by executing:
 
 ```bash
+# Launch the query CLI REPL
 srcd sql
 ```
-
-This will open a SQL REPL that allows you to execute queries against your repositories.
 
 If you want to run a query directly, you can also execute it as such:
 
 ```bash
+# Run query via CLI
 srcd sql "SHOW tables;"
 ```
 
-You might have noticed that some queries below use the UAST function. This is to transform code to a [Universal Abstract Syntax Tree](#babelfish-uast). If you want a playground to see examples of the UAST, or run your own, you can launch the parse web client.
+**Note:**
+Queries using the [UAST](#babelfish-uast) function are meant for the `web sql` interface.
+The column for UAST will be seen as binary data in the CLI.
 
-To see which languages are available, check the table of [supported languages](https://docs.sourced.tech/babelfish/languages).
+#### Parsing code
 
-The first time you launch the web client, it will download and install the recommended drivers (those that are beta or higher). 
+Sometimes you may want to parse files directly as [UASTs](#babelfish-uast).
+
+To see which languages are available, check the table of [supported languages](#babelfish-uast).
+
+##### Parse web client
+
+If you want a playground to see examples of the UAST, or run your own, you can launch the [parse web client](https://github.com/bblfsh/web).
+
+The first time you launch the web client, it will download and install the recommended language drivers (those that are beta or higher):
 
 ```bash
-# Launch the web client
+# Launch the parse web client
 srcd web parse
 ```
 
-Alternatively you can also start parsing files on the command line:
+This should open the [web interface](https://github.com/bblfsh/web) in your browser.
+You can also access it directly at [http://localhost:8081](http://localhost:8081).
+
+##### Parse command-line interface (CLI)
+
+Alternatively, you can also start parsing files on the command line:
 
 ```bash
+# Parse file via CLI
 srcd parse uast /path/to/file.java
 ```
 
-#### 5. Start executing queries
+To parse a file specifying the programming language:
 
-**Understand which tables are available to you to query**:
+```bash
+srcd parse uast --lang=LANGUAGE /path/to/file
+```
+
+To see the installed language drivers:
+
+```bash
+srcd parse drivers list
+```
+
+To install other language drivers use:
+
+```bash
+srcd parse drivers install python
+```
+
+### 5. Start executing queries
+
+**Understand which tables are available to you to query:**
+
 ```bash
 gitbase> show tables;
 +--------------+
@@ -185,13 +265,13 @@ gitbase> DESCRIBE TABLE commits;
 +---------------------+-----------+
 ```
 
-**Show me the repositories I am analyzing**:
+**Show me the repositories I am analyzing:**
 
 ```sql
 SELECT * FROM repositories;
 ```
 
-**Top 10 repositories by commit count in [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref)**:
+**Top 10 repositories by commit count in [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref):**
 
 ```sql
 SELECT repository_id,commit_count 
@@ -206,7 +286,7 @@ DESC
 LIMIT 10;
 ```
 
-**Query all files from [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref)**:
+**Query all files from [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref):**
 
 ```sql
 SELECT cf.file_path, f.blob_content 
@@ -217,7 +297,7 @@ WHERE r.ref_name = 'HEAD'
 AND r.history_index = 0;
 ```
 
-**Retrieve the UAST for all files from [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref)**:
+**Retrieve the UAST for all files from [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref):**
 
 ```sql
 SELECT * FROM (
@@ -231,7 +311,7 @@ SELECT * FROM (
 ) t WHERE uast != '';
 ```
 
-**Query for all LICENSE & README files across history**:
+**Query for all LICENSE & README files across history:**
 
 ```sql
 SELECT repository_id, blob_content 
@@ -256,52 +336,51 @@ You can now run the source{d} Engine, choose what you would like to do next:
 ## Guides and Examples
 
 For the full list of the commands supported by `srcd` and those
-that have been planned, please read [commands.md](docs/commands.md).
+on the roadmap, please read [commands.md](docs/commands.md).
 
-Collection of guides & examples using the source{d} Engine:
+Collection of documentation, guides, examples using the source{d} Engine:
 
+- [gitbase documentation](https://docs.sourced.tech/gitbase/): table schemas, syntax, functions, examples.
+- [Babelfish documentation](https://docs.sourced.tech/babelfish/): specifications, usage, examples.
 - [SonarSource Java Static Analysis Rules using Babelfish](https://github.com/bblfsh/sonar-checks)
-- A lot more coming soon! 
+- A lot more coming soon!
 
 ## Architecture
 
-source{d} Engine functions as a CLI tool that provides easy access to components of the source{d} stack for Code As Data. It consists of a daemon managing all of the services (Babelfish, Enry, Gitbase etc.) which are packaged as docker containers.
+The source{d} Engine functions as a command-line interface tool that provides easy access to components of the source{d} stack for Code As Data.
 
-<p align="center"><img src="docs/architecture-diagram.png" height="150" /></p>
+It consists of a daemon managing all of the services, which are packaged as Docker containers:
+
+- [enry](https://github.com/src-d/enry): language classifier
+- [babelfish](https://doc.bblf.sh): universal code parser
+  - [daemon](https://github.com/bblfsh/bblfshd): Babelfish server
+  - [language drivers](https://github.com/search?q=topic%3Adriver+org%3Abblfsh&type=Repositories): parsers + normalizers for programming languages
+  - [babelfish-web](https://github.com/bblfsh/web): web client for Babelfish server
+- [gitbase](https://github.com/src-d/gitbase): SQL database interface to Git repositories
+  - [gitbase-web](https://github.com/src-d/gitbase-web): web client for gitbase
 
 For more details on the architecture of this project, read [docs/architecture.md](docs/architecture.md).
 
+<img src="./architecture-diagram.png" alt="source{d} Engine"height="150" />
+
 ## Babelfish UAST
 
-One of the most important components of the source{d} engine is the UAST. 
+### Definition
 
-UAST stands for [Universal Abstract Syntax Tree](https://docs.sourced.tech/babelfish/uast/uast-specification), it is a normalized form of a programming language's AST, annotated with language-agnostic roles and transformed with language-agnostic concepts (e.g. Functions, Imports etc.). It enables advanced static analysis of code and easy feature extraction for statistics or Machine Learning on Code.
+One of the most important components of the source{d} engine is the UAST, which stands for:
+[Universal Abstract Syntax Tree](https://docs.sourced.tech/babelfish/uast/uast-specification).
 
-To parse a file for a UAST, it is as easy as:
+UASTs are a normalized form of a programming language's AST, annotated with language-agnostic roles and transformed with language-agnostic concepts (e.g. Functions, Imports etc.).
 
-```bash
-srcd parse uast --lang=LANGUAGE /path/to/file
-```
+These enable advanced static analysis of code and easy feature extraction for statistics or [Machine Learning on Code](https://github.com/src-d/awesome-machine-learning-on-source-code).
 
-To launch the web client, run the following command and start executing queries*:
+### UAST Usage
 
-```bash
-srcd web parse
-```
+To parse a file for a UAST using the source{d} Engine, head to the [Parsing Code section](#parsing-code) of this document.
 
-To see the installed language drivers:
+### Supported Languages
 
-```bash
-srcd parse drivers list
-```
-
-to install others, use:
-
-```
-srcd parse drivers install python
-```
-
-To see which languages are available, check the table of [supported languages](https://docs.sourced.tech/babelfish/languages).
+To see which languages are available, check the table of [Babelfish supported languages](https://docs.sourced.tech/babelfish/languages).
 
 ## Clients and Connectors
 
@@ -319,6 +398,7 @@ The Gitbase Spark connector is under development, which aims to allow for an eas
 
 source{d} has an amazing community of developers and contributors who are interested in Code As Data and/or Machine Learning on Code. Please join us! 👋
 
+- [Community](https://sourced.tech/community/)
 - [Slack](http://bit.ly/src-d-community)
 - [Twitter](https://twitter.com/sourcedtech)
 - [Email](mailto:hello@sourced.tech)
@@ -330,7 +410,7 @@ Please refer [to our Contribution Guide](CONTRIBUTING.md) for more details.
 
 ## Credits
 
-This software uses code from several open source packages. We'd like to thank the contributors for all their efforts:
+This software uses code from open source packages. We'd like to thank the contributors for all their efforts:
 
 - [Cobra](https://github.com/spf13/cobra)
 
