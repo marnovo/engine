@@ -360,35 +360,22 @@ For more details on the architecture of this project, read [docs/architecture.md
 
 ## Babelfish UAST
 
-One of the most important components of the source{d} engine is the UAST. 
+### Definition
 
-UAST stands for [Universal Abstract Syntax Tree](https://docs.sourced.tech/babelfish/uast/uast-specification), it is a normalized form of a programming language's AST, annotated with language-agnostic roles and transformed with language-agnostic concepts (e.g. Functions, Imports etc.). It enables advanced static analysis of code and easy feature extraction for statistics or Machine Learning on Code.
+One of the most important components of the source{d} engine is the UAST, which stands for:
+[Universal Abstract Syntax Tree](https://docs.sourced.tech/babelfish/uast/uast-specification).
 
-To parse a file for a UAST, it is as easy as:
+UASTs are a normalized form of a programming language's AST, annotated with language-agnostic roles and transformed with language-agnostic concepts (e.g. Functions, Imports etc.).
 
-```bash
-srcd parse uast --lang=LANGUAGE /path/to/file
-```
+These enable advanced static analysis of code and easy feature extraction for statistics or [Machine Learning on Code](https://github.com/src-d/awesome-machine-learning-on-source-code).
 
-To launch the web client, run the following command and start executing queries*:
+### UAST Usage
 
-```bash
-srcd web parse
-```
+To parse a file for a UAST using the source{d} Engine, head to the [Parsing Code section](#parsing-code) of this document.
 
-To see the installed language drivers:
+### Supported Languages
 
-```bash
-srcd parse drivers list
-```
-
-to install others, use:
-
-```
-srcd parse drivers install python
-```
-
-To see which languages are available, check the table of [supported languages](https://docs.sourced.tech/babelfish/languages).
+To see which languages are available, check the table of [Babelfish supported languages](https://docs.sourced.tech/babelfish/languages).
 
 ## Clients and Connectors
 
