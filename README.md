@@ -335,8 +335,10 @@ on the roadmap, please read [commands.md](docs/commands.md).
 
 Collection of documentation, guides, examples using the source{d} Engine:
 
+- [gitbase documentation](https://docs.sourced.tech/gitbase/): table schemas, syntax, functions, examples.
+- [Babelfish documentation](https://docs.sourced.tech/babelfish/): specifications, usage, examples.
 - [SonarSource Java Static Analysis Rules using Babelfish](https://github.com/bblfsh/sonar-checks)
-- A lot more coming soon! 
+- A lot more coming soon!
 
 ## Architecture
 
@@ -404,6 +406,7 @@ The Gitbase Spark connector is under development, which aims to allow for an eas
 
 source{d} has an amazing community of developers and contributors who are interested in Code As Data and/or Machine Learning on Code. Please join us! 👋
 
+- [Community](https://sourced.tech/community/)
 - [Slack](http://bit.ly/src-d-community)
 - [Twitter](https://twitter.com/sourcedtech)
 - [Email](mailto:hello@sourced.tech)
