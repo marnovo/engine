@@ -19,15 +19,14 @@
 
 ## Introduction
 
-source{d} Engine exposes powerful Universal AST's to analyze your code and a SQL engine to analyze your git history:
+The source{d} Engine exposes powerful [Universal ASTs](#babelfish-uast) to analyze your code and a SQL engine to analyze your git history:
 
 - **Code Retrieval**: retrieve and store git repositories as a dataset.
-- **Language Agnostic Code Analysis**: automatically identify languages, parse source code, and extract the pieces that matter in a completely language-agnostic way.
+- **Language-Agnostic Code Analysis**: automatically identify languages, parse source code, and extract the pieces that matter in a completely language-agnostic way.
 - **Git Analysis**: powerful SQL based analysis on top of your git repositories.
 - **Querying With Familiar APIs**: analyze your code through powerful friendly APIs, such as SQL, gRPC, REST, and various client libraries.
 
-You can find a version of this docummentation, properly rendered, at https://docs.sourced.tech/engine.
-
+You can access a rendered version of this documentation at [docs.sourced.tech/engine](https://docs.sourced.tech/engine).
 
 ## Contents
 
